@@ -41,10 +41,11 @@ final class FeedViewController: UIViewController {
     //MARK: Life cycle
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
-        setupCollectionView()
         setupRefreshControl()
-        setupNavigationBar()
+        setupCollectionView()
         setupEventsView()
+        setupNavigationBar()
+        loadNewData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +55,9 @@ final class FeedViewController: UIViewController {
     //MARK: Views Setup
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.titleView?.tintColor = .accent
+        navigationController?.navigationBar.tintColor = .accent
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.accent]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.accent]
     }
     
     private func setupRefreshControl() {
@@ -77,7 +80,29 @@ final class FeedViewController: UIViewController {
     }
     
     private func loadNewData() {
-        
+        viewModel.fetchNewData {
+            [weak self] feed in
+            self?.publish(data: feed)
+        } sucessHandler: {
+            [weak self] in
+            self?.handleSuccessFromFeedLoading()
+        } failHandler: {
+            [weak self] in
+            self?.handleErrorFromFeedLoading()
+        }
+    }
+    
+    private func appendData() {
+        viewModel.fetchDataToAppend {
+            [weak self] feed in
+            self?.append(data: feed)
+        } sucessHandler: {
+            [weak self] in
+            self?.handleSuccessFromFeedLoading()
+        } failHandler: {
+            [weak self] in
+            self?.handleErrorFromFeedLoading()
+        }
     }
     
     public func publish(data stories: [Story]) {
@@ -94,8 +119,38 @@ final class FeedViewController: UIViewController {
         dataSource.apply(snapshot)
     }
     
+    private func handleErrorFromFeedLoading() {
+        collectionView.isHidden = true
+        //MARK: REFACTOR!!!!
+        eventsView.showError(message: "Failed to Load Resources")
+        
+        if eventsView.isLoading {
+            eventsView.hideLoadingIndication()
+        }
+        
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+    
+    private func handleSuccessFromFeedLoading() {
+        collectionView.isHidden = false
+        
+        if eventsView.isShowingError {
+            eventsView.hideError()
+        }
+        
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+        
+        if eventsView.isLoading {
+            eventsView.hideLoadingIndication()
+        }
+    }
+    
     //MARK: Actions
     @objc private func refreshData(_ sender: Any) {
-        publish(data: [Story(storyIdentifier: 1, title: "OI", subtitle: "AAAAA", url: "PUDIM")])
+        loadNewData()
     }
 }

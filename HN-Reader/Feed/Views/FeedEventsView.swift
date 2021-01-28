@@ -13,6 +13,18 @@ final class FeedEventsView: UIView {
     private var errorLabel: UILabel
     private var loadingIndicator: UIActivityIndicatorView
     
+    public var isShowingError: Bool {
+        get {
+            errorLabel.isHidden
+        }
+    }
+    
+    public var isLoading: Bool {
+        get {
+            loadingIndicator.isAnimating
+        }
+    }
+    
     
     init() {
         errorLabel = UILabel()
@@ -23,6 +35,7 @@ final class FeedEventsView: UIView {
         setupErrorLabel()
         setupLoadingIndicator()
         translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = false
     }
     
     required convenience init?(coder: NSCoder) {
@@ -58,7 +71,7 @@ final class FeedEventsView: UIView {
         loadingIndicator.startAnimating()
     }
     
-    public func showHidingIndication() {
+    public func hideLoadingIndication() {
         loadingIndicator.stopAnimating()
     }
 }

@@ -23,7 +23,6 @@
 		E76E9B6125C179DF00712BBE /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B6025C179DF00712BBE /* Story.swift */; };
 		E76E9B6625C179F200712BBE /* CollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B6525C179F200712BBE /* CollectionViewSection.swift */; };
 		E76E9B6B25C17A5C00712BBE /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B6A25C17A5C00712BBE /* FeedViewController.swift */; };
-		E76E9B7025C17A8000712BBE /* DEPRECATEDFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B6F25C17A8000712BBE /* DEPRECATEDFeedViewController.swift */; };
 		E76E9B7525C17ACD00712BBE /* StoryDataSourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B7425C17ACD00712BBE /* StoryDataSourceFactory.swift */; };
 		E76E9B7A25C17B0000712BBE /* FeedRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B7925C17B0000712BBE /* FeedRepositoryProtocol.swift */; };
 		E76E9B7F25C17B1100712BBE /* MockFeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B7E25C17B1100712BBE /* MockFeedRepository.swift */; };
@@ -80,7 +79,6 @@
 		E76E9B6025C179DF00712BBE /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		E76E9B6525C179F200712BBE /* CollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSection.swift; sourceTree = "<group>"; };
 		E76E9B6A25C17A5C00712BBE /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		E76E9B6F25C17A8000712BBE /* DEPRECATEDFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEPRECATEDFeedViewController.swift; sourceTree = "<group>"; };
 		E76E9B7425C17ACD00712BBE /* StoryDataSourceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDataSourceFactory.swift; sourceTree = "<group>"; };
 		E76E9B7925C17B0000712BBE /* FeedRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRepositoryProtocol.swift; sourceTree = "<group>"; };
 		E76E9B7E25C17B1100712BBE /* MockFeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFeedRepository.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				E76E9B6A25C17A5C00712BBE /* FeedViewController.swift */,
-				E76E9B6F25C17A8000712BBE /* DEPRECATEDFeedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -491,7 +488,6 @@
 				E7D5114625C1E9FD0075D027 /* FeedListViewModelDelegate.swift in Sources */,
 				E76E9B0125C176D600712BBE /* SceneDelegate.swift in Sources */,
 				E76E9B4825C1787300712BBE /* FeedSections.swift in Sources */,
-				E76E9B7025C17A8000712BBE /* DEPRECATEDFeedViewController.swift in Sources */,
 				E76E9B9825C17BBB00712BBE /* CreateListCollectionView.swift in Sources */,
 				E76E9B6125C179DF00712BBE /* Story.swift in Sources */,
 				E7D5115B25C208910075D027 /* StoryCellRegistrationFactory.swift in Sources */,
