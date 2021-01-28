@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E72F88B525C32C4E00D76E3A /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88B425C32C4E00D76E3A /* FooterView.swift */; };
+		E72F88C725C3311100D76E3A /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88C625C3311100D76E3A /* NotificationNames.swift */; };
+		E72F88CC25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88CB25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift */; };
 		E76E9AFF25C176D600712BBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9AFE25C176D600712BBE /* AppDelegate.swift */; };
 		E76E9B0125C176D600712BBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B0025C176D600712BBE /* SceneDelegate.swift */; };
 		E76E9B0525C176D700712BBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E76E9B0425C176D700712BBE /* Assets.xcassets */; };
@@ -32,11 +35,13 @@
 		E76E9B9D25C17BD200712BBE /* ViewControllerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B9C25C17BD200712BBE /* ViewControllerUtilities.swift */; };
 		E76E9BA225C17BE600712BBE /* UIViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9BA125C17BE600712BBE /* UIViewUtilities.swift */; };
 		E76E9BA725C17C1500712BBE /* CollorPallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9BA625C17C1500712BBE /* CollorPallet.swift */; };
-		E76E9BAC25C17C3200712BBE /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9BAB25C17C3200712BBE /* MockedData.swift */; };
+		E76E9BAC25C17C3200712BBE /* NilData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9BAB25C17C3200712BBE /* NilData.swift */; };
 		E7D5114025C1E8870075D027 /* FeedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5113F25C1E8870075D027 /* FeedListViewModel.swift */; };
-		E7D5114625C1E9FD0075D027 /* FeedListViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5114525C1E9FD0075D027 /* FeedListViewModelDelegate.swift */; };
 		E7D5114F25C202E70075D027 /* FeedEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5114E25C202E70075D027 /* FeedEventsView.swift */; };
 		E7D5115B25C208910075D027 /* StoryCellRegistrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5115A25C208910075D027 /* StoryCellRegistrationFactory.swift */; };
+		E7D5117825C2E0710075D027 /* NewStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5117725C2E0710075D027 /* NewStoriesMock.swift */; };
+		E7D5117D25C2E4710075D027 /* TopStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5117C25C2E4710075D027 /* TopStoriesMock.swift */; };
+		E7D5118225C324670075D027 /* JobStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5118125C324670075D027 /* JobStoriesMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E72F88B425C32C4E00D76E3A /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		E72F88C625C3311100D76E3A /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		E72F88CB25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHeaderRegistrationFactory.swift; sourceTree = "<group>"; };
 		E76E9AFB25C176D600712BBE /* HN-Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HN-Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E76E9AFE25C176D600712BBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E76E9B0025C176D600712BBE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,11 +96,13 @@
 		E76E9B9C25C17BD200712BBE /* ViewControllerUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtilities.swift; sourceTree = "<group>"; };
 		E76E9BA125C17BE600712BBE /* UIViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewUtilities.swift; sourceTree = "<group>"; };
 		E76E9BA625C17C1500712BBE /* CollorPallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollorPallet.swift; sourceTree = "<group>"; };
-		E76E9BAB25C17C3200712BBE /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
+		E76E9BAB25C17C3200712BBE /* NilData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilData.swift; sourceTree = "<group>"; };
 		E7D5113F25C1E8870075D027 /* FeedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModel.swift; sourceTree = "<group>"; };
-		E7D5114525C1E9FD0075D027 /* FeedListViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModelDelegate.swift; sourceTree = "<group>"; };
 		E7D5114E25C202E70075D027 /* FeedEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedEventsView.swift; sourceTree = "<group>"; };
 		E7D5115A25C208910075D027 /* StoryCellRegistrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCellRegistrationFactory.swift; sourceTree = "<group>"; };
+		E7D5117725C2E0710075D027 /* NewStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoriesMock.swift; sourceTree = "<group>"; };
+		E7D5117C25C2E4710075D027 /* TopStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesMock.swift; sourceTree = "<group>"; };
+		E7D5118125C324670075D027 /* JobStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobStoriesMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +130,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E72F88C525C330F700D76E3A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E72F88C625C3311100D76E3A /* NotificationNames.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E76E9AF225C176D600712BBE = {
 			isa = PBXGroup;
 			children = (
@@ -221,8 +239,8 @@
 		E76E9B5125C1793500712BBE /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				E72F88C525C330F700D76E3A /* Extensions */,
 				E7D5114D25C202C70075D027 /* Views */,
-				E7D5114425C1E9E50075D027 /* Delegate */,
 				E7D5113E25C1E7AA0075D027 /* ViewModels */,
 				E76E9B5725C1798400712BBE /* Models */,
 				E76E9B5625C1797D00712BBE /* ViewControllers */,
@@ -257,6 +275,7 @@
 			children = (
 				E76E9B7425C17ACD00712BBE /* StoryDataSourceFactory.swift */,
 				E7D5115A25C208910075D027 /* StoryCellRegistrationFactory.swift */,
+				E72F88CB25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -282,7 +301,10 @@
 		E76E9B8625C17B5C00712BBE /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				E76E9BAB25C17C3200712BBE /* MockedData.swift */,
+				E76E9BAB25C17C3200712BBE /* NilData.swift */,
+				E7D5117725C2E0710075D027 /* NewStoriesMock.swift */,
+				E7D5117C25C2E4710075D027 /* TopStoriesMock.swift */,
+				E7D5118125C324670075D027 /* JobStoriesMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -322,18 +344,11 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		E7D5114425C1E9E50075D027 /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				E7D5114525C1E9FD0075D027 /* FeedListViewModelDelegate.swift */,
-			);
-			path = Delegate;
-			sourceTree = "<group>";
-		};
 		E7D5114D25C202C70075D027 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E7D5114E25C202E70075D027 /* FeedEventsView.swift */,
+				E72F88B425C32C4E00D76E3A /* FooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -468,27 +483,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D5117825C2E0710075D027 /* NewStoriesMock.swift in Sources */,
 				E76E9B6B25C17A5C00712BBE /* FeedViewController.swift in Sources */,
+				E72F88CC25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift in Sources */,
 				E76E9B3925C177AF00712BBE /* CompactTabBarController.swift in Sources */,
 				E76E9BA725C17C1500712BBE /* CollorPallet.swift in Sources */,
 				E76E9B7525C17ACD00712BBE /* StoryDataSourceFactory.swift in Sources */,
 				E76E9B9D25C17BD200712BBE /* ViewControllerUtilities.swift in Sources */,
 				E76E9B5925C179D700712BBE /* Feed.swift in Sources */,
 				E76E9B3E25C1780D00712BBE /* CompactViewCoordinator.swift in Sources */,
+				E72F88C725C3311100D76E3A /* NotificationNames.swift in Sources */,
 				E76E9B8B25C17B8400712BBE /* ErrorLabel.swift in Sources */,
+				E7D5117D25C2E4710075D027 /* TopStoriesMock.swift in Sources */,
 				E76E9B7A25C17B0000712BBE /* FeedRepositoryProtocol.swift in Sources */,
 				E76E9B4325C1783400712BBE /* SplitViewCoordinatorProtocol.swift in Sources */,
 				E76E9BA225C17BE600712BBE /* UIViewUtilities.swift in Sources */,
+				E7D5118225C324670075D027 /* JobStoriesMock.swift in Sources */,
 				E76E9B7F25C17B1100712BBE /* MockFeedRepository.swift in Sources */,
 				E76E9AFF25C176D600712BBE /* AppDelegate.swift in Sources */,
 				E76E9B4D25C178A600712BBE /* FeedSectionInfo.swift in Sources */,
-				E76E9BAC25C17C3200712BBE /* MockedData.swift in Sources */,
+				E76E9BAC25C17C3200712BBE /* NilData.swift in Sources */,
 				E76E9B9325C17B9D00712BBE /* CoordinatorProtocol.swift in Sources */,
 				E76E9B6625C179F200712BBE /* CollectionViewSection.swift in Sources */,
-				E7D5114625C1E9FD0075D027 /* FeedListViewModelDelegate.swift in Sources */,
 				E76E9B0125C176D600712BBE /* SceneDelegate.swift in Sources */,
 				E76E9B4825C1787300712BBE /* FeedSections.swift in Sources */,
 				E76E9B9825C17BBB00712BBE /* CreateListCollectionView.swift in Sources */,
+				E72F88B525C32C4E00D76E3A /* FooterView.swift in Sources */,
 				E76E9B6125C179DF00712BBE /* Story.swift in Sources */,
 				E7D5115B25C208910075D027 /* StoryCellRegistrationFactory.swift in Sources */,
 				E7D5114025C1E8870075D027 /* FeedListViewModel.swift in Sources */,

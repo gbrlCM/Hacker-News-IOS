@@ -12,20 +12,30 @@ final class MockFeedRepository: FeedRepository {
     
     private var cancellable = Set<AnyCancellable>()
     
-    private func mock(for data: FeedSection) -> Data {
+    private func mock(for data: FeedSection, in page: Int) -> Data {
+        
+        let feed: [Data]
+        
         switch data {
         case .new:
-            return mockNewFeed
+            feed = newStoriesMock
         case .job:
-            return mockJobFeed
+            feed = jobStoriesMock
         case .top:
-            return mockTopFeed
+            feed = topStoriesMock
         }
+        
+        guard page < feed.count else {
+            return nilData
+        }
+        
+        return feed[page]
     }
     
     func fetch(for type: FeedSection, in page: Int, receiveHandler: @escaping (Feed) -> Void, sucessHandler: @escaping () -> Void, failHandler: @escaping () -> Void) {
         
-        Just(mock(for: type))
+        Just(mock(for: type, in: page))
+            .print()
             .decode(type: Feed.self, decoder: JSONDecoder())
             .delay(for: .seconds(1), scheduler: RunLoop.main)
             .sink(receiveCompletion: {

@@ -12,3 +12,10 @@ struct Feed: Codable {
     var quantity: Int
     var data: [Story]
 }
+
+extension Feed {
+    
+    static var null: Feed {
+        Feed(page: 0, quantity: 0, data: [])
+    }
+}

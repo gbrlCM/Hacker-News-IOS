@@ -14,17 +14,22 @@ final class FeedViewController: UIViewController {
     private var collectionView: UICollectionView
     private var refreshControl: UIRefreshControl
     private var eventsView: FeedEventsView
+    private var loadingFlag: Bool = false
     
     //MARK: Variables
     private var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, Story>
     private var cellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Story>
+    private var footerRegistration: UICollectionView.SupplementaryRegistration<FooterView>
     private var viewModel: FeedListViewModel
+    private var notificationCenter: NotificationCenter
     
     //MARK: Inits
     init(coordinator: SplitViewCoordinator, viewModel: FeedListViewModel) {
         self.viewModel = viewModel
+        notificationCenter = NotificationCenter()
         collectionView = UICollectionView.createList(withStyle: .plain)
         cellRegistration = StoryCellRegistrationFactory.create()
+        footerRegistration = StoryHeaderRegistrationFactory.create(notificationCenter: notificationCenter)
         dataSource = StoryDataSourceFactory.create(for: collectionView, cellRegistration: cellRegistration)
         refreshControl = UIRefreshControl()
         eventsView = FeedEventsView()
@@ -70,16 +75,22 @@ final class FeedViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.addSubview(refreshControl)
         collectionView.setFullScreenConstraint(to: view)
-        
+        collectionView.delegate = self
         collectionView.isHidden = true
+        dataSource.supplementaryViewProvider = {[unowned self] view, elementKind, indexPath in
+            self.collectionView.dequeueConfiguredReusableSupplementary(using: self.footerRegistration, for: indexPath)
+        }
+        
     }
     
     private func setupEventsView() {
         view.addSubview(eventsView)
         eventsView.setFullScreenConstraint(to: view)
+        eventsView.showLoadingIndication()
     }
     
     private func loadNewData() {
+        post(notification: .resetFooter)
         viewModel.fetchNewData {
             [weak self] feed in
             self?.publish(data: feed)
@@ -93,9 +104,14 @@ final class FeedViewController: UIViewController {
     }
     
     private func appendData() {
+        loadingFlag = true
+        post(notification: .startedFetchingMoreData)
+        
         viewModel.fetchDataToAppend {
             [weak self] feed in
             self?.append(data: feed)
+            print(feed)
+            self?.handleFinishLoadingPost(stories: feed)
         } sucessHandler: {
             [weak self] in
             self?.handleSuccessFromFeedLoading()
@@ -116,7 +132,7 @@ final class FeedViewController: UIViewController {
         var snapshot = dataSource.snapshot()
         snapshot.appendItems(stories)
         
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func handleErrorFromFeedLoading() {
@@ -152,5 +168,54 @@ final class FeedViewController: UIViewController {
     //MARK: Actions
     @objc private func refreshData(_ sender: Any) {
         loadNewData()
+    }
+}
+
+extension FeedViewController: UICollectionViewDelegate {
+    
+    private func isEligibleForDataFetching(_ scrollView: UIScrollView) -> Bool {
+        
+        let scrollViewYoffset = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let scrollViewFrameHeight = scrollView.frame.size.height
+        
+        let didReachTheEnd = scrollViewYoffset > contentHeight - scrollViewFrameHeight
+        let isNotFirstScreenInitialization = dataSource.numberOfSections(in: collectionView) > 0
+        
+        return didReachTheEnd && isNotFirstScreenInitialization && !loadingFlag
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if isEligibleForDataFetching(scrollView){
+            appendData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        print(item)
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+}
+
+//MARK: Observers
+extension FeedViewController {
+    
+    func post(notification name: NSNotification.Name) {
+        notificationCenter.post(name: name, object: nil)
+    }
+    
+    func handleFinishLoadingPost(stories: [Story]) {
+        if stories == [] {
+            post(notification: .reachedTheEndOfTheLine)
+        }
+        else {
+            post(notification: .endedFetchingMoreData)
+            loadingFlag = false
+        }
     }
 }

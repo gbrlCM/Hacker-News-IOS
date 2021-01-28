@@ -20,10 +20,12 @@ final class StoryCellRegistrationFactory {
             contentConfiguration.textProperties.adjustsFontSizeToFitWidth = true
             contentConfiguration.textProperties.font = .systemFont(ofSize: 18, weight: .semibold)
             contentConfiguration.secondaryText = item.subtitle
+            contentConfiguration.secondaryTextProperties.color = .secondaryLabel
             contentConfiguration.textToSecondaryTextVerticalPadding = 8
             cell.contentConfiguration = contentConfiguration
             let backgroundView = UIView()
             backgroundView.backgroundColor = .accent
+            cell.layer.zPosition = 1
             
             cell.selectedBackgroundView = backgroundView
         }

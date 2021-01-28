@@ -12,7 +12,8 @@ extension UICollectionView {
     
     static func createList(withStyle style: UICollectionLayoutListConfiguration.Appearance) -> UICollectionView {
         
-        let layoutConfiguration = UICollectionLayoutListConfiguration(appearance: style)
+        var layoutConfiguration = UICollectionLayoutListConfiguration(appearance: style)
+        layoutConfiguration.footerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: layoutConfiguration)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
