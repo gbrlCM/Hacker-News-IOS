@@ -14,7 +14,7 @@ extension UIView {
     func setFullScreenConstraint(to view: UIView) {
         
         let constraint = [
-            topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topAnchor.constraint(equalTo: view.topAnchor),
             leadingAnchor.constraint(equalTo: view.leadingAnchor),
             trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomAnchor.constraint(equalTo: view.bottomAnchor)

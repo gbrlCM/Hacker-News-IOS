@@ -22,12 +22,14 @@ final class FeedViewController: UIViewController {
     private var footerRegistration: UICollectionView.SupplementaryRegistration<FooterView>
     private var viewModel: FeedListViewModel
     private var notificationCenter: NotificationCenter
+    private var coordinator: SplitViewCoordinatorProtocol
     
     //MARK: Inits
-    init(coordinator: SplitViewCoordinator, viewModel: FeedListViewModel) {
+    init(coordinator: SplitViewCoordinatorProtocol, viewModel: FeedListViewModel) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         notificationCenter = NotificationCenter()
-        collectionView = UICollectionView.createList(withStyle: .plain)
+        collectionView = UICollectionView.createList(withStyle: .sidebarPlain)
         cellRegistration = StoryCellRegistrationFactory.create()
         footerRegistration = StoryHeaderRegistrationFactory.create(notificationCenter: notificationCenter)
         dataSource = StoryDataSourceFactory.create(for: collectionView, cellRegistration: cellRegistration)
@@ -38,7 +40,7 @@ final class FeedViewController: UIViewController {
     
     required convenience init?(coder: NSCoder) {
         guard let viewModel = coder.decodeObject(forKey: "viewModel") as? FeedListViewModel,
-              let coordinator = coder.decodeObject(forKey: "SplitViewCoordinator") as? SplitViewCoordinator else { return nil}
+              let coordinator = coder.decodeObject(forKey: "SplitViewCoordinator") as? SplitViewCoordinatorProtocol else { return nil}
         
         self.init(coordinator: coordinator, viewModel: viewModel)
     }
@@ -50,16 +52,17 @@ final class FeedViewController: UIViewController {
         setupCollectionView()
         setupEventsView()
         setupNavigationBar()
+        viewReactTo(state: .loadedInitialStories)
         loadNewData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = viewModel.viewTitle
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     //MARK: Views Setup
     private func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accent
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.accent]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.accent]
@@ -86,8 +89,9 @@ final class FeedViewController: UIViewController {
     private func setupEventsView() {
         view.addSubview(eventsView)
         eventsView.setFullScreenConstraint(to: view)
-        eventsView.showLoadingIndication()
     }
+    
+    //MARK: Data fetching view handling
     
     private func loadNewData() {
         post(notification: .resetFooter)
@@ -96,10 +100,10 @@ final class FeedViewController: UIViewController {
             self?.publish(data: feed)
         } sucessHandler: {
             [weak self] in
-            self?.handleSuccessFromFeedLoading()
+            self?.viewReactTo(state: .loadedInitialStories)
         } failHandler: {
             [weak self] in
-            self?.handleErrorFromFeedLoading()
+            self?.viewReactTo(state: .errorFetchingInitialStories)
         }
     }
     
@@ -110,14 +114,13 @@ final class FeedViewController: UIViewController {
         viewModel.fetchDataToAppend {
             [weak self] feed in
             self?.append(data: feed)
-            print(feed)
             self?.handleFinishLoadingPost(stories: feed)
         } sucessHandler: {
             [weak self] in
-            self?.handleSuccessFromFeedLoading()
+            self?.viewReactTo(state: .loadedNewStories)
         } failHandler: {
             [weak self] in
-            self?.handleErrorFromFeedLoading()
+            self?.viewReactTo(state: .errorFetchingNewStories)
         }
     }
     
@@ -131,38 +134,7 @@ final class FeedViewController: UIViewController {
     public func append(data stories: [Story]) {
         var snapshot = dataSource.snapshot()
         snapshot.appendItems(stories)
-        
         dataSource.apply(snapshot, animatingDifferences: true)
-    }
-    
-    private func handleErrorFromFeedLoading() {
-        collectionView.isHidden = true
-        //MARK: REFACTOR!!!!
-        eventsView.showError(message: "Failed to Load Resources")
-        
-        if eventsView.isLoading {
-            eventsView.hideLoadingIndication()
-        }
-        
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-    }
-    
-    private func handleSuccessFromFeedLoading() {
-        collectionView.isHidden = false
-        
-        if eventsView.isShowingError {
-            eventsView.hideError()
-        }
-        
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-        
-        if eventsView.isLoading {
-            eventsView.hideLoadingIndication()
-        }
     }
     
     //MARK: Actions
@@ -171,6 +143,7 @@ final class FeedViewController: UIViewController {
     }
 }
 
+//MARK: Delegate
 extension FeedViewController: UICollectionViewDelegate {
     
     private func isEligibleForDataFetching(_ scrollView: UIScrollView) -> Bool {
@@ -195,9 +168,7 @@ extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-        print(item)
-        
+        coordinator.show(story: item.url)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
@@ -211,11 +182,52 @@ extension FeedViewController {
     
     func handleFinishLoadingPost(stories: [Story]) {
         if stories == [] {
-            post(notification: .reachedTheEndOfTheLine)
+            viewReactTo(state: .noMoreStoriesAvailable)
         }
         else {
-            post(notification: .endedFetchingMoreData)
+            viewReactTo(state: .loadedNewStories)
             loadingFlag = false
+        }
+    }
+}
+
+//MARK: State handling
+extension FeedViewController {
+    
+    enum ViewState {
+        case loadingNewStories
+        case loadedNewStories
+        case loadedInitialStories
+        case noMoreStoriesAvailable
+        case errorFetchingInitialStories
+        case errorFetchingNewStories
+    }
+    
+    func viewReactTo(state: ViewState) {
+        switch state {
+        case .loadingNewStories:
+            eventsView.showLoadingIndication()
+            
+        case .loadedNewStories:
+            post(notification: .endedFetchingMoreData)
+            
+        case .loadedInitialStories:
+            collectionView.isHidden = false
+            eventsView.hideError()
+            eventsView.hideLoadingIndication()
+            refreshControl.endRefreshing()
+            
+        case .noMoreStoriesAvailable:
+            post(notification: .reachedTheEndOfTheLine)
+            
+        case .errorFetchingNewStories:
+            collectionView.isHidden = true
+            eventsView.showError(message: "Failed to Load Resources")
+            
+        case .errorFetchingInitialStories:
+            collectionView.isHidden = true
+            eventsView.showError(message: "Failed to Load Resources")
+            eventsView.hideLoadingIndication()
         }
     }
 }

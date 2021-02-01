@@ -7,7 +7,11 @@
 
 import Foundation
 
-enum FeedSection {
+enum FeedSection: CaseIterable {
+    
+    static var allCases: [FeedSection] {
+        return [.top, .new, .job]
+    }
     
     case top
     case new
@@ -17,11 +21,11 @@ enum FeedSection {
         get {
             switch self {
                 case .job:
-                    return FeedSectionInfo(name: "Jobs", image: "case.fill")
+                    return FeedSectionInfo(name: "Jobs", image: "case")
                 case .new:
-                    return FeedSectionInfo(name: "New", image: "newspaper.fill")
+                    return FeedSectionInfo(name: "New", image: "newspaper")
                 case .top:
-                    return FeedSectionInfo(name: "Top", image: "flame.fill")
+                    return FeedSectionInfo(name: "Top", image: "flame")
             }
         }
     }

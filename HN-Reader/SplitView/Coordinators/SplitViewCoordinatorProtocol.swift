@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SplitViewCoordinator: Coordinator {
+protocol SplitViewCoordinatorProtocol: Coordinator {
     
-    func showStory()
+    func show(story urlRawValue: String)
 }

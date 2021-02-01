@@ -10,6 +10,11 @@
 		E72F88B525C32C4E00D76E3A /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88B425C32C4E00D76E3A /* FooterView.swift */; };
 		E72F88C725C3311100D76E3A /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88C625C3311100D76E3A /* NotificationNames.swift */; };
 		E72F88CC25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88CB25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift */; };
+		E72F88D625C3A38100D76E3A /* CompactWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88D525C3A38100D76E3A /* CompactWebViewController.swift */; };
+		E72F88DF25C4617400D76E3A /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88DE25C4617400D76E3A /* SidebarViewController.swift */; };
+		E72F88E725C469EE00D76E3A /* SideBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88E625C469EE00D76E3A /* SideBarFactory.swift */; };
+		E72F88ED25C46CCE00D76E3A /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88EC25C46CCE00D76E3A /* SidebarViewModel.swift */; };
+		E72F88F525C46F5200D76E3A /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F88F425C46F5200D76E3A /* SplitViewController.swift */; };
 		E76E9AFF25C176D600712BBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9AFE25C176D600712BBE /* AppDelegate.swift */; };
 		E76E9B0125C176D600712BBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76E9B0025C176D600712BBE /* SceneDelegate.swift */; };
 		E76E9B0525C176D700712BBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E76E9B0425C176D700712BBE /* Assets.xcassets */; };
@@ -42,6 +47,8 @@
 		E7D5117825C2E0710075D027 /* NewStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5117725C2E0710075D027 /* NewStoriesMock.swift */; };
 		E7D5117D25C2E4710075D027 /* TopStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5117C25C2E4710075D027 /* TopStoriesMock.swift */; };
 		E7D5118225C324670075D027 /* JobStoriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5118125C324670075D027 /* JobStoriesMock.swift */; };
+		E7D5A9D625C849630046384F /* SplitViewWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5A9D525C849630046384F /* SplitViewWebViewController.swift */; };
+		E7D5A9DB25C84B550046384F /* SplitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5A9DA25C84B550046384F /* SplitViewCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +72,11 @@
 		E72F88B425C32C4E00D76E3A /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		E72F88C625C3311100D76E3A /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		E72F88CB25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHeaderRegistrationFactory.swift; sourceTree = "<group>"; };
+		E72F88D525C3A38100D76E3A /* CompactWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactWebViewController.swift; sourceTree = "<group>"; };
+		E72F88DE25C4617400D76E3A /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		E72F88E625C469EE00D76E3A /* SideBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarFactory.swift; sourceTree = "<group>"; };
+		E72F88EC25C46CCE00D76E3A /* SidebarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewModel.swift; sourceTree = "<group>"; };
+		E72F88F425C46F5200D76E3A /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		E76E9AFB25C176D600712BBE /* HN-Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HN-Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E76E9AFE25C176D600712BBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E76E9B0025C176D600712BBE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +115,8 @@
 		E7D5117725C2E0710075D027 /* NewStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoriesMock.swift; sourceTree = "<group>"; };
 		E7D5117C25C2E4710075D027 /* TopStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesMock.swift; sourceTree = "<group>"; };
 		E7D5118125C324670075D027 /* JobStoriesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobStoriesMock.swift; sourceTree = "<group>"; };
+		E7D5A9D525C849630046384F /* SplitViewWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewWebViewController.swift; sourceTree = "<group>"; };
+		E7D5A9DA25C84B550046384F /* SplitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +152,39 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E72F88D325C3A2F600D76E3A /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				E72F88D425C3A31400D76E3A /* ViewControllers */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		E72F88D425C3A31400D76E3A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E72F88D525C3A38100D76E3A /* CompactWebViewController.swift */,
+				E7D5A9D525C849630046384F /* SplitViewWebViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E72F88DD25C4615500D76E3A /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				E72F88E625C469EE00D76E3A /* SideBarFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		E72F88EB25C46CC100D76E3A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E72F88EC25C46CCE00D76E3A /* SidebarViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		E76E9AF225C176D600712BBE = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +208,7 @@
 		E76E9AFD25C176D600712BBE /* HN-Reader */ = {
 			isa = PBXGroup;
 			children = (
+				E72F88D325C3A2F600D76E3A /* WebView */,
 				E76E9B5225C1793A00712BBE /* System */,
 				E76E9B5125C1793500712BBE /* Feed */,
 				E76E9B3425C1773E00712BBE /* SplitView */,
@@ -203,6 +251,8 @@
 		E76E9B3425C1773E00712BBE /* SplitView */ = {
 			isa = PBXGroup;
 			children = (
+				E72F88EB25C46CC100D76E3A /* ViewModels */,
+				E72F88DD25C4615500D76E3A /* Factories */,
 				E76E9B3725C1777A00712BBE /* ViewControllers */,
 				E76E9B3625C1776F00712BBE /* Coordinators */,
 				E76E9B3525C1776000712BBE /* Model */,
@@ -224,6 +274,7 @@
 			children = (
 				E76E9B3D25C1780D00712BBE /* CompactViewCoordinator.swift */,
 				E76E9B4225C1783400712BBE /* SplitViewCoordinatorProtocol.swift */,
+				E7D5A9DA25C84B550046384F /* SplitViewCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -232,6 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				E76E9B3825C177AF00712BBE /* CompactTabBarController.swift */,
+				E72F88DE25C4617400D76E3A /* SidebarViewController.swift */,
+				E72F88F425C46F5200D76E3A /* SplitViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -483,11 +536,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E72F88E725C469EE00D76E3A /* SideBarFactory.swift in Sources */,
 				E7D5117825C2E0710075D027 /* NewStoriesMock.swift in Sources */,
 				E76E9B6B25C17A5C00712BBE /* FeedViewController.swift in Sources */,
 				E72F88CC25C3359400D76E3A /* StoryHeaderRegistrationFactory.swift in Sources */,
 				E76E9B3925C177AF00712BBE /* CompactTabBarController.swift in Sources */,
 				E76E9BA725C17C1500712BBE /* CollorPallet.swift in Sources */,
+				E7D5A9D625C849630046384F /* SplitViewWebViewController.swift in Sources */,
 				E76E9B7525C17ACD00712BBE /* StoryDataSourceFactory.swift in Sources */,
 				E76E9B9D25C17BD200712BBE /* ViewControllerUtilities.swift in Sources */,
 				E76E9B5925C179D700712BBE /* Feed.swift in Sources */,
@@ -498,7 +553,9 @@
 				E76E9B7A25C17B0000712BBE /* FeedRepositoryProtocol.swift in Sources */,
 				E76E9B4325C1783400712BBE /* SplitViewCoordinatorProtocol.swift in Sources */,
 				E76E9BA225C17BE600712BBE /* UIViewUtilities.swift in Sources */,
+				E72F88DF25C4617400D76E3A /* SidebarViewController.swift in Sources */,
 				E7D5118225C324670075D027 /* JobStoriesMock.swift in Sources */,
+				E7D5A9DB25C84B550046384F /* SplitViewCoordinator.swift in Sources */,
 				E76E9B7F25C17B1100712BBE /* MockFeedRepository.swift in Sources */,
 				E76E9AFF25C176D600712BBE /* AppDelegate.swift in Sources */,
 				E76E9B4D25C178A600712BBE /* FeedSectionInfo.swift in Sources */,
@@ -511,6 +568,9 @@
 				E72F88B525C32C4E00D76E3A /* FooterView.swift in Sources */,
 				E76E9B6125C179DF00712BBE /* Story.swift in Sources */,
 				E7D5115B25C208910075D027 /* StoryCellRegistrationFactory.swift in Sources */,
+				E72F88F525C46F5200D76E3A /* SplitViewController.swift in Sources */,
+				E72F88D625C3A38100D76E3A /* CompactWebViewController.swift in Sources */,
+				E72F88ED25C46CCE00D76E3A /* SidebarViewModel.swift in Sources */,
 				E7D5114025C1E8870075D027 /* FeedListViewModel.swift in Sources */,
 				E7D5114F25C202E70075D027 /* FeedEventsView.swift in Sources */,
 			);

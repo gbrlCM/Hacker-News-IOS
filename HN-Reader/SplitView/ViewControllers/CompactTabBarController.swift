@@ -29,7 +29,7 @@ class FeedCompactTabBarController: UITabBarController {
     private func setupTabBarItem(for section: FeedSection, tag: Int) -> UINavigationController {
         let coordinator = CompactViewFeedCoordinator(for: section)
         coordinator.start()
-        coordinator.navigationController.tabBarItem = UITabBarItem(title: section.info.name, image: UIImage(systemName: section.info.image), tag: tag)
+        coordinator.navigationController.tabBarItem = UITabBarItem(title: section.info.name, image: UIImage(systemName: "\(section.info.image).fill"), tag: tag)
         
         return coordinator.navigationController
     }

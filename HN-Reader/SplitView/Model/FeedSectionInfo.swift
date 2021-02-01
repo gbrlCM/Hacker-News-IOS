@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct FeedSectionInfo: Equatable {
+struct FeedSectionInfo: Hashable {
     var name: String
     var image: String
 }

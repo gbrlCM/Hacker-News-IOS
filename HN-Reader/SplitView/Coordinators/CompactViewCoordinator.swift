@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class CompactViewFeedCoordinator: SplitViewCoordinator {
+final class CompactViewFeedCoordinator: SplitViewCoordinatorProtocol {
     
     var navigationController: UINavigationController
     private let section: FeedSection
@@ -24,7 +24,7 @@ final class CompactViewFeedCoordinator: SplitViewCoordinator {
         navigationController.pushViewController(rootViewController, animated: false)
     }
     
-    func showStory() {
-        
+    func show(story urlRawValue: String) {
+        navigationController.pushViewController(CompactWebViewController(url: URL(string: urlRawValue)!), animated: true)
     }
 }
