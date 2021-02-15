@@ -8,6 +8,7 @@ This is my first iOS app, I made before the start of my Apple Developer Academy 
 * Swift
 * Combine
 * BBF Rest API with Swift using Vapor
+* Publishing a Vapor API on Heroku
 * Using TypeScript to create a data Mock
 * Protocol Oriented Programming basics
 * Git with terminal
@@ -20,3 +21,7 @@ This app list the news from the HN feed and as you click you visit the URL embed
 * Infinite feed like scroll behaviour
 * Protocol Oriented Repository making testing easier
 * Usage of SplitViewControlller for seamless iPad, iPhone and small windows iPad view transition, choosing the correct view accordingly the screen size
+
+## Other repositories from this project
+* [Mock generation script](https://github.com/gbrlCM/HackerNews-BFF-API-Mock)
+* [BFF API](https://github.com/gbrlCM/HackerNews-BFF-API)
