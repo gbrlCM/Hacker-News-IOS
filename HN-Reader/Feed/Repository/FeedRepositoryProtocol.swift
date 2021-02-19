@@ -9,6 +9,7 @@ import Foundation
 
 protocol FeedRepository: AnyObject {
     
-    func fetch(for type: FeedSection, in page: Int, receiveHandler: @escaping (_ feed: Feed) -> Void, sucessHandler: @escaping () -> Void, failHandler: @escaping () -> Void)
-    
+    func fetch(for type: FeedSection, in page: Int, ids: [Int], completionHandler: @escaping (Result<Feed, Error>) -> Void)
+    func initialFetch(for type: FeedSection, completionHandler: @escaping (Result<Feed, Error>) -> Void)
 }
+

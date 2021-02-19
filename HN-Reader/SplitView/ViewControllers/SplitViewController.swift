@@ -11,7 +11,7 @@ import UIKit
 final class SplitViewController: UIViewController {
     
     private var splitView: UISplitViewController
-    private var feed: FeedViewController
+    private var feed: [FeedSection:FeedViewController] = [:]
     private var coordinator: SplitViewCoordinator
     private var sidebar: SidebarViewController
     private var webView: SplitViewWebViewController
@@ -23,8 +23,12 @@ final class SplitViewController: UIViewController {
         compactView = FeedCompactTabBarController()
         webView = SplitViewWebViewController()
         coordinator = SplitViewCoordinator(webViewController: webView)
-        feed = FeedViewController(coordinator: coordinator, viewModel: FeedListViewModel(for: .new))
         super.init(nibName: nil, bundle: nil)
+        feed = FeedSection.allCases.reduce(into: [FeedSection : FeedViewController]()) {
+            result, section in
+            result[section] = FeedViewController(coordinator: coordinator, viewModel: FeedListViewModel(for: section), appearence: .sidebarPlain)
+        }
+        sidebar.collectionView.delegate = self
     }
     
     required convenience init?(coder: NSCoder) {
@@ -38,9 +42,19 @@ final class SplitViewController: UIViewController {
         splitView.view.setFullScreenConstraint(to: view)
         
         splitView.setViewController(sidebar, for: .primary)
-        splitView.setViewController(feed, for: .supplementary)
+        splitView.setViewController(feed[FeedSection.allCases.first!], for: .supplementary)
         splitView.setViewController(webView, for: .secondary)
         splitView.setViewController(compactView, for: .compact)
         splitView.preferredDisplayMode = .oneBesideSecondary
+    }
+}
+
+extension SplitViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let section = sidebar.getIdentifier(at: indexPath) else { return }
+        splitView.setViewController(feed[section], for: .supplementary)
+        
     }
 }

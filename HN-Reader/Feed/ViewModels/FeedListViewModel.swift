@@ -11,7 +11,8 @@ final class FeedListViewModel {
     
     public let viewTitle: String
     private let section: FeedSection
-    private let repository: FeedRepository = MockFeedRepository()
+    private var storyIds: [Int] = []
+    private let repository: FeedRepository = FeedRepositoryNetwork()
     private var page: Int = 0
     public var dataQuantity: Int = 0
     
@@ -20,17 +21,31 @@ final class FeedListViewModel {
         self.section = section
     }
     
-    public func fetchNewData(receiveHandler: @escaping (_ feed: [Story]) -> Void, sucessHandler: @escaping () -> Void, failHandler: @escaping () -> Void) {
-        page = 0
-        repository.fetch(for: section, in: page, receiveHandler: { [weak self] feed in
-            self?.page += 1
-            self?.dataQuantity += feed.quantity
-            receiveHandler(feed.data)
-        } , sucessHandler: sucessHandler, failHandler: failHandler)
+    public func loadNewData(UIHandler: @escaping (Result<[Story], Error>) -> Void) {
+        repository.initialFetch(for: section ) {[self] result in
+            switch result {
+            case .failure(let error):
+                page = 0
+                UIHandler(.failure(error))
+            case .success(let feed):
+                self.storyIds = feed.ids
+                self.dataQuantity += feed.quantity
+                UIHandler(.success(feed.data))
+            }
+        }
     }
     
-    public func fetchDataToAppend(receiveHandler: @escaping (_ feed: [Story]) -> Void, sucessHandler: @escaping () -> Void, failHandler: @escaping () -> Void) {
-        repository.fetch(for: section, in: page, receiveHandler: { feed in receiveHandler(feed.data)}, sucessHandler: sucessHandler, failHandler: failHandler)
+    public func appendNewData(UIHandler: @escaping (Result<[Story], Error>) -> Void) {
         page += 1
+        repository.fetch(for: section, in: page, ids: storyIds) {[self] result in
+            switch result {
+            case .failure(let error):
+                page = 0
+                UIHandler(.failure(error))
+            case .success(let feed):
+                self.dataQuantity += feed.quantity
+                UIHandler(.success(feed.data))
+            }
+        }
     }
 }

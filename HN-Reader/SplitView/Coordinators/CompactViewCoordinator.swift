@@ -20,7 +20,7 @@ final class CompactViewFeedCoordinator: SplitViewCoordinatorProtocol {
     
     func start() {
         let viewModel = FeedListViewModel(for: section)
-        let rootViewController = FeedViewController(coordinator: self, viewModel: viewModel)
+        let rootViewController = FeedViewController(coordinator: self, viewModel: viewModel, appearence: .plain)
         navigationController.pushViewController(rootViewController, animated: false)
     }
     

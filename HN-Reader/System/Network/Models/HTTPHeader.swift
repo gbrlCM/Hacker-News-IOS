@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+final class HTTPHeader {
+    
+    enum AuthType: String {
+        case bearer = "Bearer"
+    }
+    
+    enum ContentType: String {
+        case json = "application/json"
+        case html = "text/html"
+    }
+    
+    var authorization: String?
+    var authorizationType: AuthType = .bearer
+    var contentType: ContentType = .json
+}

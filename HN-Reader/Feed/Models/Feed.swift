@@ -10,12 +10,13 @@ import Foundation
 struct Feed: Codable {
     var page: Int
     var quantity: Int
+    var ids: [Int]
     var data: [Story]
 }
 
 extension Feed {
     
     static var null: Feed {
-        Feed(page: 0, quantity: 0, data: [])
+        Feed(page: 0, quantity: 0, ids: [], data: [])
     }
 }

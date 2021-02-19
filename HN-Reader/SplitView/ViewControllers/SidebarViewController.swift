@@ -15,7 +15,7 @@ final class SidebarViewController: UIViewController {
     }
     
     public var collectionView: UICollectionView
-    private var dataSource: UICollectionViewDiffableDataSource<SidebarSection, FeedSectionInfo>
+    private var dataSource: UICollectionViewDiffableDataSource<SidebarSection, FeedSection>
     private var factory: SidebarFactory
     private var viewModel: SidebarViewModel
     
@@ -49,10 +49,14 @@ final class SidebarViewController: UIViewController {
     
     private func appendSections() {
     
-        var snapshot = NSDiffableDataSourceSnapshot<SidebarSection, FeedSectionInfo>()
+        var snapshot = NSDiffableDataSourceSnapshot<SidebarSection, FeedSection>()
         snapshot.appendSections([.main])
         snapshot.appendItems(viewModel.sectionsData)
         dataSource.apply(snapshot)
         
+    }
+    
+    public func getIdentifier(at indexPath: IndexPath) -> FeedSection? {
+        dataSource.itemIdentifier(for: indexPath)
     }
 }

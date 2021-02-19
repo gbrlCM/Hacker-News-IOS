@@ -25,11 +25,11 @@ final class FeedViewController: UIViewController {
     private var coordinator: SplitViewCoordinatorProtocol
     
     //MARK: Inits
-    init(coordinator: SplitViewCoordinatorProtocol, viewModel: FeedListViewModel) {
+    init(coordinator: SplitViewCoordinatorProtocol, viewModel: FeedListViewModel, appearence: UICollectionLayoutListConfiguration.Appearance) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         notificationCenter = NotificationCenter()
-        collectionView = UICollectionView.createList(withStyle: .sidebarPlain)
+        collectionView = UICollectionView.createList(withStyle: appearence)
         cellRegistration = StoryCellRegistrationFactory.create()
         footerRegistration = StoryHeaderRegistrationFactory.create(notificationCenter: notificationCenter)
         dataSource = StoryDataSourceFactory.create(for: collectionView, cellRegistration: cellRegistration)
@@ -42,7 +42,7 @@ final class FeedViewController: UIViewController {
         guard let viewModel = coder.decodeObject(forKey: "viewModel") as? FeedListViewModel,
               let coordinator = coder.decodeObject(forKey: "SplitViewCoordinator") as? SplitViewCoordinatorProtocol else { return nil}
         
-        self.init(coordinator: coordinator, viewModel: viewModel)
+        self.init(coordinator: coordinator, viewModel: viewModel, appearence: .plain)
     }
     
     //MARK: Life cycle
@@ -79,6 +79,7 @@ final class FeedViewController: UIViewController {
         collectionView.addSubview(refreshControl)
         collectionView.setFullScreenConstraint(to: view)
         collectionView.delegate = self
+        collectionView.backgroundColor = .systemBackground
         collectionView.isHidden = true
         dataSource.supplementaryViewProvider = {[unowned self] view, elementKind, indexPath in
             self.collectionView.dequeueConfiguredReusableSupplementary(using: self.footerRegistration, for: indexPath)
@@ -95,32 +96,28 @@ final class FeedViewController: UIViewController {
     
     private func loadNewData() {
         post(notification: .resetFooter)
-        viewModel.fetchNewData {
-            [weak self] feed in
-            self?.publish(data: feed)
-        } sucessHandler: {
-            [weak self] in
-            self?.viewReactTo(state: .loadedInitialStories)
-        } failHandler: {
-            [weak self] in
-            self?.viewReactTo(state: .errorFetchingInitialStories)
+        viewModel.loadNewData { [self] result in
+            switch result {
+            case .failure(_):
+                viewReactTo(state: .errorFetchingInitialStories)
+            case .success(let feed):
+                publish(data: feed)
+                viewReactTo(state: .loadedInitialStories)
+            }
         }
     }
     
     private func appendData() {
         loadingFlag = true
         post(notification: .startedFetchingMoreData)
-        
-        viewModel.fetchDataToAppend {
-            [weak self] feed in
-            self?.append(data: feed)
-            self?.handleFinishLoadingPost(stories: feed)
-        } sucessHandler: {
-            [weak self] in
-            self?.viewReactTo(state: .loadedNewStories)
-        } failHandler: {
-            [weak self] in
-            self?.viewReactTo(state: .errorFetchingNewStories)
+        viewModel.appendNewData {[self] result in
+            switch result {
+            case .failure(_):
+                viewReactTo(state: .errorFetchingNewStories)
+            case .success(let feed):
+                append(data: feed)
+                handleFinishLoadingPost(stories: feed)
+            }
         }
     }
     
@@ -206,9 +203,10 @@ extension FeedViewController {
     func viewReactTo(state: ViewState) {
         switch state {
         case .loadingNewStories:
-            eventsView.showLoadingIndication()
+            refreshControl.beginRefreshing()
             
         case .loadedNewStories:
+            refreshControl.endRefreshing()
             post(notification: .endedFetchingMoreData)
             
         case .loadedInitialStories:

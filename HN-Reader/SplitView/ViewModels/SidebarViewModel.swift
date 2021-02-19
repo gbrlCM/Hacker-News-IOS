@@ -9,18 +9,5 @@ import Foundation
 
 struct SidebarViewModel {
     
-    var sectionsData: [FeedSectionInfo] = []
-    
-    private mutating func generateList() {
-        var items: [FeedSectionInfo] = []
-        for section in FeedSection.allCases {
-            items.append(section.info)
-        }
-        sectionsData = items
-    }
-    
-    init() {
-        generateList()
-    }
-    
+    var sectionsData: [FeedSection] = FeedSection.allCases
 }

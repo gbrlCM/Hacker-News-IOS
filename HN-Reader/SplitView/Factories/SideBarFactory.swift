@@ -17,23 +17,23 @@ final class SidebarFactory {
         return UICollectionView(frame: .zero, collectionViewLayout: configuration)
     }
     
-    private func createCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, FeedSectionInfo> {
+    private func createCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, FeedSection> {
         
-        return UICollectionView.CellRegistration<UICollectionViewListCell, FeedSectionInfo>{
+        return UICollectionView.CellRegistration<UICollectionViewListCell, FeedSection>{
             (cell, indexPath, item) in
            var configuration = cell.defaultContentConfiguration()
-            configuration.text = item.name
-            configuration.image = UIImage(systemName: item.image)
+            configuration.text = item.info.name
+            configuration.image = UIImage(systemName: item.info.image)
             cell.contentConfiguration = configuration
         }
     }
     
-    public func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<SidebarViewController.SidebarSection, FeedSectionInfo> {
+    public func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<SidebarViewController.SidebarSection, FeedSection> {
         
         let cellRegistration = createCellRegistration()
         
-        return UICollectionViewDiffableDataSource<SidebarViewController.SidebarSection, FeedSectionInfo> (collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, data: FeedSectionInfo) -> UICollectionViewCell? in
+        return UICollectionViewDiffableDataSource<SidebarViewController.SidebarSection, FeedSection> (collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, data: FeedSection) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: data)
             return cell
