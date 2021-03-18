@@ -52,7 +52,7 @@ final class FeedViewController: UIViewController {
         setupCollectionView()
         setupEventsView()
         setupNavigationBar()
-        viewReactTo(state: .loadedInitialStories)
+        viewReactTo(state: .loadingInitialStories)
         loadNewData()
     }
     
@@ -194,6 +194,7 @@ extension FeedViewController {
     enum ViewState {
         case loadingNewStories
         case loadedNewStories
+        case loadingInitialStories
         case loadedInitialStories
         case noMoreStoriesAvailable
         case errorFetchingInitialStories
@@ -208,6 +209,9 @@ extension FeedViewController {
         case .loadedNewStories:
             refreshControl.endRefreshing()
             post(notification: .endedFetchingMoreData)
+            
+        case .loadingInitialStories:
+            eventsView.showLoadingIndication()
             
         case .loadedInitialStories:
             collectionView.isHidden = false
